@@ -51,7 +51,7 @@ This is a fun kata that has the programmer building simple combat rules, as for 
 
 - Are you keeping up with the requirements? Has any iteration been a big challenge?
 - Do you feel good about your design? Is it scalable and easily adapted to new requirements?
-- Is everything tested? Are you confident in your code?
+- Is everything tested? Are you confident in your code? 
 
 ## Iteration Four ##
 

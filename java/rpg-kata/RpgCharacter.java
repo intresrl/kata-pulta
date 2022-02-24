@@ -1,13 +1,20 @@
 public class RpgCharacter {
 
-    private int health = 1000;
+    public static final int MAX_HEALTH = 1000;
+    private int health = MAX_HEALTH;
+    private int level = 1;
+    private Faction faction;
 
     public int getHealth() {
         return health;
     }
 
     public int getLevel() {
-        return 1;
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public boolean isAlive() {
@@ -19,7 +26,24 @@ public class RpgCharacter {
     }
 
     public void dealDamage(RpgCharacter target, int damage) {
-        target.receiveDamage(damage);
+        if (target != this) {
+            int actualDamage = getActualDamage(target, damage);
+
+            target.receiveDamage(actualDamage);
+        }
+    }
+
+    private int getActualDamage(RpgCharacter target, int damage) {
+        var gapLevel = target.getLevel()-getLevel();
+        return computeDamage(damage, gapLevel);
+    }
+
+    private int computeDamage(int damage, int gapLevel) {
+        int actualDamage;
+        if (gapLevel >=5) actualDamage = damage / 2;
+        else if (gapLevel <=-5) actualDamage = damage + damage /2;
+        else actualDamage = damage;
+        return actualDamage;
     }
 
     private void receiveDamage(int damage) {
@@ -27,12 +51,40 @@ public class RpgCharacter {
     }
 
     public void heal(RpgCharacter target, int cure) {
-        if (target.isAlive()) {
+        if (target == this && target.isAlive()) {
             target.receiveCure(cure);
         }
     }
 
     private void receiveCure(int cure) {
-        health = Math.min(1000, cure + health);
+        health = Math.min(MAX_HEALTH, cure + health);
+    }
+
+    public int getRange(){
+        throw(new UnsupportedOperationException());
+    }
+
+    public Faction getFaction() {
+        return this.faction;
+    }
+
+    public void joinFaction(Faction faction) {
+        this.faction = faction;
     }
 }
+
+class MeleeFighter  extends RpgCharacter{
+    public int getRange(){
+        return 2;
+    }
+}
+
+class RangedFighter  extends RpgCharacter{
+    public int getRange(){
+        return 20;
+    }
+}
+
+
+
+

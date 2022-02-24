@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="tests">
+  <library name="JUnit">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/java/lib/apiguardian-api-1.1.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/java/lib/junit-jupiter-5.8.1.jar!/" />
