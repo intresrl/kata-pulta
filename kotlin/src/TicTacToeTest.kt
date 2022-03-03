@@ -38,8 +38,8 @@ internal class TicTacToeTest {
         game.take(X, 0, 0)
         game.take(O, 2, 0)
         game.take(X, 1, 1)
+        game.take(O, 1, 2)
         game.take(X, 2, 2)
-        game.take(X, 1, 2)
 
         println(game.toString())
         assertTrue(game.over())
