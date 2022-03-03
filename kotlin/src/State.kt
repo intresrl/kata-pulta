@@ -1,5 +1,11 @@
 enum class State {
-    X, O, EMPTY
+    X{
+     override fun nextPlayer() = O
+     }, O, EMPTY;
+
+    open fun nextPlayer(): State {
+        return X;
+    }
 }
 
 fun getPlayer() =

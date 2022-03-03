@@ -4,7 +4,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-internal class TicTacToeTest {
+internal class TicTacToeTest2 {
 
     @Test
     fun `game has nine fields`() {
