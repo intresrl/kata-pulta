@@ -32,7 +32,7 @@ class SalBoard(initial: Map<Location, Player?> = emptyMap()) {
 
     private fun allTaken() = state.none { (_, e) -> e == null }
 
-    private fun winOnARow() = values().toList().windowed(3).anyWins()
+    private fun winOnARow() = values().toList().chunked(3).anyWins()
 
     private fun winOnAColumn() =
         listOf(
@@ -77,6 +77,4 @@ class SalTris(startingPlayer: Player = Player.X) {
 
     override fun toString() = "\n$board\n"
 
-
 }
-
