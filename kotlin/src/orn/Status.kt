@@ -11,7 +11,7 @@ enum class Status {
         }
     }, DRAW {
         override fun message() {
-            println("No winners today")
+            println("No winners today,sad day")
         }
     };
 

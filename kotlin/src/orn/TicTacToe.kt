@@ -59,17 +59,16 @@ class TicTacToe {
 
 fun main() {
     var currentPlayer = if (Math.random()>0.5) State.X else State.O
+    val board = TicTacToe()
     do {
-        TicTacToe().move(currentPlayer)
-        TicTacToe().updateStatus(currentPlayer)
-        TicTacToe().printBoard()
-        if (TicTacToe().currentStatus === Status.X_WON) {
-            Status.X_WON.message()
-        } else if (TicTacToe().currentStatus === Status.O_WON) {
-            Status.O_WON.message()
-        } else if (TicTacToe().currentStatus === Status.DRAW) {
-            Status.DRAW.message()
+        board.move(currentPlayer)
+        board.updateStatus(currentPlayer)
+        board.printBoard()
+        when {
+            board.currentStatus === Status.X_WON -> Status.X_WON.message()
+            board.currentStatus === Status.O_WON -> Status.O_WON.message()
+            board.currentStatus === Status.DRAW -> Status.DRAW.message()
         }
         currentPlayer = if (currentPlayer === State.X) State.O else State.X
-    } while (TicTacToe().currentStatus === Status.PLAYING)
+    } while (board.currentStatus === Status.PLAYING)
 }
