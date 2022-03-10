@@ -1,4 +1,6 @@
-import State.*
+package mob
+
+import mob.State.*
 
 class Board {
     private val grid = MutableList(3) {
@@ -7,7 +9,7 @@ class Board {
         }
     }
 
-    fun get(x: Int, y: Int): State{
+    fun get(x: Int, y: Int): State {
         return grid[y][x]
     }
 

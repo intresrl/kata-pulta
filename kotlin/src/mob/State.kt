@@ -1,3 +1,5 @@
+package mob
+
 enum class State {
     X{
      override fun nextPlayer() = O

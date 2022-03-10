@@ -1,4 +1,6 @@
-import State.EMPTY
+package mob
+
+import mob.State.EMPTY
 
 class TicTacToe {
     val grid = MutableList(3) {
