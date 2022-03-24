@@ -13,11 +13,7 @@ class TicTacToe {
         var row: Int
         var col: Int
         do {
-            if (player === State.X) {
-                println("Enter move for player 'X' (row[0-2] column[0-2]): ")
-            } else {
-                println("Enter move for player 'O' (row[0-2] column[0-2]): ")
-            }
+            println("Enter move for player $player (row[0-2] column[0-2]): ")
             row = Integer.valueOf(readLine())
             col = Integer.valueOf(readLine())
             if (row in 0..2 && col in 0..2 && grid[row][col] === State.EMPTY) {
@@ -42,15 +38,12 @@ class TicTacToe {
     }
 
     fun hasWon(player: State): Boolean {
-        if (grid.any { row -> row.all { it == player } } ||
-            (grid.all { it[0] == player } ||
+        return (grid.any { row -> row.all { it == player } } ||
+            grid.all { it[0] == player } ||
             grid.all { it[1] == player } ||
-            grid.all { it[2] == player }) ||
+            grid.all { it[2] == player } ||
             (0..2).all { grid[it][it] == player } ||
-            (0..2).all { grid[it][2 - it] == player }) {
-            return true
-        }
-        return false
+            (0..2).all { grid[it][2 - it] == player })
     }
 
     fun printBoard(): String =
@@ -66,17 +59,16 @@ class TicTacToe {
 
 fun main() {
     var currentPlayer = if (Math.random()>0.5) State.X else State.O
+    val board = TicTacToe()
     do {
-        TicTacToe().move(currentPlayer)
-        TicTacToe().updateStatus(currentPlayer)
-        TicTacToe().printBoard()
-        if (TicTacToe().currentStatus === Status.X_WON) {
-            Status.X_WON.message()
-        } else if (TicTacToe().currentStatus === Status.O_WON) {
-            Status.O_WON.message()
-        } else if (TicTacToe().currentStatus === Status.DRAW) {
-            Status.DRAW.message()
+        board.move(currentPlayer)
+        board.updateStatus(currentPlayer)
+        board.printBoard()
+        when {
+            board.currentStatus === Status.X_WON -> Status.X_WON.message()
+            board.currentStatus === Status.O_WON -> Status.O_WON.message()
+            board.currentStatus === Status.DRAW -> Status.DRAW.message()
         }
         currentPlayer = if (currentPlayer === State.X) State.O else State.X
-    } while (TicTacToe().currentStatus === Status.PLAYING)
+    } while (board.currentStatus === Status.PLAYING)
 }
