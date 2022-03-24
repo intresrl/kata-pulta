@@ -33,30 +33,21 @@ internal class SalWardrobeTest {
     @Test
     fun `width is unique sum`() {
         val actual = combinations(116, listOf(40, 39, 37))
-        val expected = setOf(
-            // all permutations
-            listOf(40, 39, 37),
-            listOf(40, 37, 39),
-            listOf(39, 40, 37),
-            listOf(37, 40, 39),
-            listOf(39, 37, 40),
-            listOf(37, 39, 40),
-        )
+        val expected = setOf(listOf(37, 39, 40))
         assertEquals(expected, actual)
     }
 
     @Test
     internal fun `so many combinations`() {
         val goal = 18
-        val sizes = listOf(4,5,6,8)
-        val actual= combinations(goal,sizes)
+        val sizes = listOf(4, 5, 6, 8)
+        val actual = combinations(goal, sizes)
         val expected = setOf(
-            listOf(8,5,5), listOf(5,8,5), listOf(5,5,8),
-            listOf(8,4,6), listOf(4,8,6), listOf(4,6,8),
-            listOf(8,6,4), listOf(6,8,4), listOf(6,4,8),
-            listOf(6,6,6),
-            listOf(4,4,4,6), listOf(4,4,6,4), listOf(4,6,4,4), listOf(6,4,4,4),
-            listOf(4,4,5,5), listOf(4,5,4,5), listOf(5,4,4,5), listOf(4,5,5,4), listOf(5,4,5,4), listOf(5,5,4,4),
+            listOf(5, 5, 8),
+            listOf(4, 6, 8),
+            listOf(6, 6, 6),
+            listOf(4, 4, 4, 6),
+            listOf(4, 4, 5, 5),
         )
         assertEquals(expected, actual)
     }
