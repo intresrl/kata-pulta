@@ -1,6 +1,6 @@
-package mob
+package ticTacToe.mob
 
-import mob.State.*
+import ticTacToe.mob.State.*
 
 class Board {
     private val grid = MutableList(3) {

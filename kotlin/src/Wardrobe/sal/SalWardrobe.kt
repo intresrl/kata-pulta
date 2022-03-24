@@ -1,4 +1,4 @@
-package sal.wardrobe
+package wardrobe.sal
 
 typealias Width = Int
 typealias Price = Int

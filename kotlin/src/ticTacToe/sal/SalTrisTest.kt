@@ -1,7 +1,7 @@
-package sal
+package ticTacToe.sal
 
 import org.junit.jupiter.api.Test
-import sal.Location.*
+import ticTacToe.sal.Location.*
 
 
 class SalTrisTest {

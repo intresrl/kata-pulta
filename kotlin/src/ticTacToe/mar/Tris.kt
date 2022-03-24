@@ -1,4 +1,4 @@
-package mar
+package ticTacToe.mar
 
 class Tris {
     private var next = 'O'

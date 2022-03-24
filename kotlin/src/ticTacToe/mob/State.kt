@@ -1,4 +1,4 @@
-package mob
+package ticTacToe.mob
 
 enum class State {
     X{

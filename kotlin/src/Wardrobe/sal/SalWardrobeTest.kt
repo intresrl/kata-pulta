@@ -1,4 +1,4 @@
-package sal.wardrobe
+package wardrobe.sal
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue

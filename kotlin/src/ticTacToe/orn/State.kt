@@ -1,4 +1,4 @@
-package orn
+package ticTacToe.orn
 
 enum class State {
     X, O, EMPTY;

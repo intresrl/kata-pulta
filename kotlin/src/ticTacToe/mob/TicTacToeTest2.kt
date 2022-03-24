@@ -1,4 +1,4 @@
-package mob
+package ticTacToe.mob
 
 import org.junit.jupiter.api.Test
 

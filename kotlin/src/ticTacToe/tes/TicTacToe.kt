@@ -1,8 +1,8 @@
-package tes
+package ticTacToe.tes
 
-import tes.State.EMPTY
-import tes.State.X
-import tes.State.O
+import ticTacToe.tes.State.EMPTY
+import ticTacToe.tes.State.X
+import ticTacToe.tes.State.O
 
 class TicTacToe {
     val grid = MutableList(3) {
