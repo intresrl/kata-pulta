@@ -28,5 +28,6 @@
     <orderEntry type="library" name="apiguardian-api-1.1.2" level="project" />
     <orderEntry type="library" name="kotlin-lib" level="project" />
     <orderEntry type="library" name="Python 3.9 (kata-pulta) interpreter library" level="application" />
+    <orderEntry type="library" name="lib1" level="project" />
   </component>
 </module>
