@@ -17,6 +17,7 @@ fun combinations(
                 val partial = combinations(rest, availableSizes)
                 partial.map { it + width }
             }
+            .map { it.sorted() }
             .toSet()
 
 fun Collection<List<Width>>.cheapest(
