@@ -34,7 +34,9 @@ class WardrobeCalculator:
     def moneySaver(self,eleCombinations):
         max=999999
         for combination in eleCombinations:
-            if(sum(map(lambda o: self.getPriceFromDim(o),combination))<=max):
+            combinationPrice=sum(map(lambda o: self.getPriceFromDim(o),combination))
+            if(combinationPrice<=max):
+                max=combinationPrice
                 bestCombination=combination
         return bestCombination
 
