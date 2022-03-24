@@ -1,6 +1,7 @@
 import kotlin.collections.EmptyList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,12 +14,22 @@ public class Wardrobe {
     }
 
     List<List<Integer>> permutatePieces(List<Integer> pieces) {
-        List<List<Integer>> perms = new ArrayList<>();
-        for(int i=0; i < pieces.size(); i++) {
-            perms.add(perm(pieces, new ArrayList<>()));
-        }
-        return perms;
+        List<List<Integer>> finalResults = new ArrayList<>();
+        final List<List<Integer>> starting = pieces.stream().map(List::of).collect(Collectors.toList());
+        return calculate(pieces, finalResults, starting);
     }
+
+    List<List<Integer>> calculate(List<Integer> pieces, List<List<Integer>> finalResults, List<List<Integer>> checking) {
+        if(checking.isEmpty()) {
+            return finalResults;
+        }
+        checking.stream().map(list -> {
+            pieces.forEach(p -> {
+
+            });
+        })
+    }
+
 
     private List<Integer> perm(List<Integer> pieces, List<Integer> oldPerm) {
         if(pieces.size() == 0) {
