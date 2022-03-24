@@ -1,4 +1,4 @@
-package mar
+package fra.wardrobe
 
 import fra.wardrobe.WardrobeFactory
 import org.junit.jupiter.api.Test
