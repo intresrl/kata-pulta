@@ -1,6 +1,6 @@
-package sil
+package ticTacToe.sil
 
-import mob.State
+import ticTacToe.mob.State
 
 import kotlin.random.Random
 
@@ -21,12 +21,12 @@ class Board {
         else return State.O
     }
 
-    fun getFreeSpaces(): IntArray {
-        var freeSpaces: MutableList<FreeSpace> = ArrayList()
-        var aux = grid.flatten()
-        aux.forEachIndexed { index, x ->
-            if (x === mob.State.EMPTY)
-                freeSpaces.add()
-        }
-    }
+//    fun getFreeSpaces(): IntArray {
+//        var freeSpaces: MutableList<FreeSpace> = ArrayList()
+//        var aux = grid.flatten()
+//        aux.forEachIndexed { index, x ->
+//           if (x === State.EMPTY)
+//                freeSpaces.add()
+//        }
+//    }
 }
