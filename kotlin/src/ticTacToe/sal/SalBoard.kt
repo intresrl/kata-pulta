@@ -1,6 +1,6 @@
-package sal
+package ticTacToe.sal
 
-import sal.Location.*
+import ticTacToe.sal.Location.*
 import java.util.*
 
 enum class Location {

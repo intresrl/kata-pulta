@@ -1,6 +1,6 @@
-package tes
+package ticTacToe.tes
 
-import tes.State.*
+import ticTacToe.tes.State.*
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse

@@ -1,4 +1,4 @@
-package orn
+package ticTacToe.orn
 
 class TicTacToe {
     private val grid = MutableList(3) {

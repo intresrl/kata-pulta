@@ -1,4 +1,4 @@
-package tes
+package ticTacToe.tes
 
 enum class State {
     X{

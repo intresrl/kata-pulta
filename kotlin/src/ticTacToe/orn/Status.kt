@@ -1,4 +1,4 @@
-package orn
+package ticTacToe.orn
 
 enum class Status {
     PLAYING, X_WON{
