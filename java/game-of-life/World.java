@@ -18,16 +18,21 @@ public class World {
         }
     }
 
+    public World(List<List<Cell>> status){
+        this.status = status;
+    }
+
     public World nextWorld() {
+        List<List<Cell>> nextStatus = new ArrayList<>();
         for (int i = 0, statusSize = status.size(); i < statusSize; i++) {
             List<Cell> row = status.get(i);
             for (int j = 0, rowSize = row.size(); j < rowSize; j++) {
                 Cell cell = row.get(j);
-
                 cell = changeStatus(i, j);
+                row.set(j,cell);
             }
         }
-        return null;
+        return new World(nextStatus);
     }
 
     private Cell changeStatus(int row, int col) {
@@ -44,8 +49,9 @@ public class World {
 
     private int countNeighbors(int row, int col) {
         int sum = 0;
-        for (int r = row - 1; r >= 0 && r <= row + 1; r += 2)
-            for (int c = col - 1; c >= 0 && c <= col + 1; c += 2)
+        int dimension = status.get(row).size();
+        for (int r = Math.max(0,row - 1); r < dimension; r += 2)
+            for (int c = Math.max(0,col - 1); c < dimension; c += 2)
                 if (status.get(r).get(c).isAlive())
                     sum++;
         return sum;

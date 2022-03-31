@@ -8,16 +8,14 @@ public class GameOfLife {
         System.out.println("ciao");
 
         String initial =
-                "..x," +
                 "...," +
+                ".x.," +
                 "...";
 
         final World world = new World(initial);
         System.out.println(world);
 
-
-
-
+        System.out.println(world.nextWorld());
     }
 
 
