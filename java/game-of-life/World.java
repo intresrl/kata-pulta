@@ -10,7 +10,7 @@ public class World {
 
     public World(String initial) {
         for (String stringRow : initial.split(",")) {
-            final ArrayList<Cell> row = new ArrayList<>();
+            List<Cell> row = new ArrayList<>();
             for (char cell : stringRow.toCharArray()) {
                 row.add(new Cell(cell != '.'));
             }
@@ -30,8 +30,25 @@ public class World {
         return null;
     }
 
-    private Cell changeStatus(int x, int y) {
-        return null;
+    private Cell changeStatus(int row, int col) {
+        switch (countNeighbors(row, col)) {
+            case 2:
+                if (status.get(row).get(col).isAlive())
+                    return new Cell(false);
+            case 3:
+                return new Cell(true);
+            default:
+                return new Cell(false);
+        }
+    }
+
+    private int countNeighbors(int row, int col) {
+        int sum = 0;
+        for (int r = row - 1; r >= 0 && r <= row + 1; r += 2)
+            for (int c = col - 1; c >= 0 && c <= col + 1; c += 2)
+                if (status.get(r).get(c).isAlive())
+                    sum++;
+        return sum;
     }
 
 
