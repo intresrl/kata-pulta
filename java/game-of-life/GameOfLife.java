@@ -4,20 +4,19 @@ import java.util.List;
 
 public class GameOfLife {
 
-    public static void main(String []args){
+    public static void main(String[] args) {
         System.out.println("ciao");
 
         String initial =
                 "...," +
-                ".x.," +
-                "...";
+                        "xxx," +
+                        "...";
 
         final World world = new World(initial);
         System.out.println(world);
-
         System.out.println(world.nextWorld());
-    }
 
+    }
 
 
 }
