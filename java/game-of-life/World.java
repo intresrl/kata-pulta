@@ -37,7 +37,7 @@ public class World {
     private Cell changeStatus(int row, int col) {
         switch (countNeighbors(row, col)) {
             case 2:
-                if (status.get(row).get(col).isAlive())
+                if (!status.get(row).get(col).isAlive())
                     return new Cell(false);
             case 3:
                 return new Cell(true);
@@ -49,8 +49,8 @@ public class World {
     private int countNeighbors(int row, int col) {
         int sum = 0;
         int dimension = status.get(row).size();
-        for (int r = Math.max(0,row - 1); r < dimension; r += 1)
-            for (int c = Math.max(0,col - 1); c < dimension; c += 1) {
+        for (int r = Math.max(0,row - 1); r < Math.min(dimension,row + 1); r += 1)
+            for (int c = Math.max(0,col - 1); c < Math.min(dimension,col + 1); c += 1) {
                 boolean isCurrent = r == row && c == col;
                 if (status.get(r).get(c).isAlive() && !isCurrent)
                     sum++;
