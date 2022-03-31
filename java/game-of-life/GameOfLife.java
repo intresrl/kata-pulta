@@ -13,8 +13,11 @@ public class GameOfLife {
                 "...";
 
         final World world = new World(initial);
-
         System.out.println(world);
+
+
+
+
     }
 
 
