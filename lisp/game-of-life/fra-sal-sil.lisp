@@ -1,23 +1,13 @@
-; Rules
-; For a space that is populated:
-; Examples
-; Each cell with one or no neighbors dies, as if by  solitude.
-; Each cell with four or more neighbors dies, as if by overpopulation.
-; Each cell with two or three neighbors survives.
-; 
-; For a space that is empty or unpopulated:
-; Each cell with three neighbors becomes populated.
-
-(defun evolveCell (cell aliveNeighbors) 
-    (cond 
-      ((eq cell 0) 
-        (cond 
+(defun evolveCell (cell aliveNeighbors)
+    (cond
+      ((eq cell 0)
+        (cond
           ((eq aliveNeighbors 3) 1)
           (t 0)
         )
       )
-      ((eq cell 1) 
-        (cond 
+      ((eq cell 1)
+        (cond
           ((eq aliveNeighbors 2) 1)
           ((eq aliveNeighbors 3) 1)
           (t 0)
@@ -25,6 +15,41 @@
       )
     )
 )
+
+(defun evolveGrid (grid)
+
+)
+
+
+(defun getCell (x y grid)
+    (
+        cond
+          ((< x 0) 0)
+          ((< y 0) 0)
+          (t  (or (nth x (nth y grid))0))
+    )
+)
+
+(defun getNeighbours (x y grid)
+    (
+        reduce '+
+            (
+                list
+                    (getCell (- x 1) (- y 1) grid)
+                    (getCell x (- y 1) grid)
+                    (getCell (+ x 1) (- y 1) grid)
+
+                    (getCell (- x 1) y grid)
+                    (getCell (+ x 1) y grid)
+
+                    (getCell (- x 1) (+ y 1) grid)
+                    (getCell x (+ y 1) grid)
+                    (getCell (+ x 1) (+ y 1) grid)
+
+            )
+    )
+)
+
 (let (
    (grid '(
      (0 1 0)
@@ -35,5 +60,6 @@
  )
  (print (car grid))
  (print (cdr grid))
-
+ (print (getCell 0 -1 grid))
+ (print (getNeighbours 1 2 grid))
 )
