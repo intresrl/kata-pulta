@@ -19,36 +19,20 @@
 
 (defun evolveGrid (grid)
     (
-        let ((y 0))
-        (
-            mapcar #'
+        let ((y -1))
+        (mapcar #'(lambda (row)
+            (incf y)
             (
-                lambda (row)
-                (
-                    let ((x 0)
-                    (
-                        gino
-                        (
-                           mapcar #'
-                           (
-                                lambda (cell)
-                                (
-                                    let ((pino (
-                                                evolveCell cell (getNeighbours x y grid))
-                                        ))
-                                    (incf x)
-                                    pino
-                                )
-                            )
-                            row
-                        )
-                    ))
-                    (incf y)
-                    gino
-                )
+                let ((x -1))
+                (mapcar #'(lambda (cell)
+                    (incf x)
+                    (evolveCell
+                      (getCell x y grid)
+                      (getNeighbours x y grid)
+                    )
+                ) row)
             )
-        grid
-        )
+        ) grid)
     )
 )
 
@@ -84,15 +68,14 @@
 
 (let (
    (grid '(
-     (0 1 0)
-     (1 1 0)
-     (1 0 1)
+     (0 0 0 0 0 0)
+     (0 0 0 0 0 0)
+     (0 0 1 1 1 0)
+     (0 1 1 1 0 0)
+     (0 0 0 0 0 0)
+     (0 0 0 0 0 0)
    ))
-   (y '(a b c))
  )
- (print (car grid))
- (print (cdr grid))
- (print (getCell 0 -1 grid))
- (print (getNeighbours 1 2 grid))
- (print (evolveGrid grid))
+
+ (loop for riga in (evolveGrid grid) do (print riga))
 ))
