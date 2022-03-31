@@ -14,7 +14,7 @@ public class GameOfLife {
 
         final World world = new World(initial);
         System.out.println(world);
-        System.out.println();
+        System.out.println("\n---NEXT---\n");
         System.out.println(world.nextWorld());
 
     }
