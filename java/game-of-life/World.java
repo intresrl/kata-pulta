@@ -9,7 +9,7 @@ public class World {
     List<List<Cell>> status = new ArrayList<>();
 
     public World(String initial) {
-        for (String stringRow : initial.split(",")) {
+        for (String stringRow : initial.split("\n")) {
             List<Cell> row = new ArrayList<>();
             for (char cell : stringRow.toCharArray()) {
                 row.add(new Cell(cell != '.'));
@@ -26,7 +26,7 @@ public class World {
         List<List<Cell>> nextStatus = new ArrayList<>();
         for (int i = 0, statusSize = status.size(); i < statusSize; i++) {
             List<Cell> row = status.get(i);
-            List<Cell> nextRow = new ArrayList<Cell>();
+            List<Cell> nextRow = new ArrayList<>();
             for (int j = 0, rowSize = row.size(); j < rowSize; j++) {
                 Cell cell = changeStatus(i, j);
                 nextRow.add(cell);
@@ -68,6 +68,6 @@ public class World {
                         .map(Cell::toString)
                         .collect(Collectors.joining())
                 )
-                .collect(Collectors.joining(","));
+                .collect(Collectors.joining("\n"));
     }
 }
