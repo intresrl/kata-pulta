@@ -51,8 +51,8 @@ public class World {
         int dimension = status.get(row).size();
         for (int r = Math.max(0,row - 1); r < dimension; r += 1)
             for (int c = Math.max(0,col - 1); c < dimension; c += 1) {
-                boolean isCurrent = r != row && c != col;
-                if (status.get(r).get(c).isAlive() && isCurrent)
+                boolean isCurrent = r == row && c == col;
+                if (status.get(r).get(c).isAlive() && !isCurrent)
                     sum++;
             }
         return sum;

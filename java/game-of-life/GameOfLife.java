@@ -4,9 +4,10 @@ public class GameOfLife {
         System.out.println("ciao");
 
         String initial = """
-                   .*.
-                   .*.
-                   .*.""";
+                   ....
+                   .**.
+                   .**.
+                   ....""";
 
         final World world = new World(initial);
         System.out.println(world);
