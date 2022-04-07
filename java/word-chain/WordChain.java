@@ -1,21 +1,29 @@
-
-
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WordChain {
     static String firstWord="cat";
     static String lastWord="dog";
-    
+
+    public boolean subword(String first, String second) {
+        int mismatchCount = 0;
+        for (int i = 0; i < first.length(); i++) {
+            mismatchCount = first.charAt(i) != second.charAt(i) ? mismatchCount + 1 : mismatchCount;
+            if (mismatchCount > 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String []args) throws Exception{
 
         String everything;
-
-        extracted(firstWord.length());
-
+        List<String> words = List.of("ciao", "mondo");
+        extracted(firstWord.length(), words);
 
     }
 
@@ -36,16 +44,17 @@ public class WordChain {
         }
     }
 
-    private static List<String> getGraph(List<String> words, String startingWord) {
+    private Tree getGraph(List<String> words, String startingWord) {
+        Tree newTree = new Tree(startingWord);
+        Node root = newTree.getRoot();
         words.forEach(word -> {
             int mismatchCount = 0;
 
-            for (int i = 0; i < word.length(); i++) {
-                mismatchCount = word.charAt(i) != startingWord.charAt(i) ? mismatchCount++ : mismatchCount;
-                if (mismatchCount > 1) {
-
-                }
+            if (subword(startingWord, word)) {
+                Node childNode = new Node(word);
+                root.addChild(childNode);
             }
         });
+        return newTree;
     }
 }
