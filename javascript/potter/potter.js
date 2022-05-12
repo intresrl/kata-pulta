@@ -63,7 +63,10 @@ For a total of 51.20
 And 51.20 is the price with the biggest discount.
 */
 
+const BOOKS = ["A", "B", "C", "D", "E"];
+
 module.exports = function resolve(input) {
-    const output = 8
-    return output
+    if(!BOOKS.includes(input))
+        return 'ERROR'
+    return 8
 }
