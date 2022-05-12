@@ -16,6 +16,7 @@ describe('Harry Potter bookshop', () => {
     it(`Books C + D cost 16 EUR - 5%`, () => sapiens("C D", 16 * 0.95))
 
     it(`Books A + C + D cost 16 EUR - 10%`, () => sapiens("A C D", 24 * 0.90))
+
 })
 
 

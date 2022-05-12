@@ -84,12 +84,19 @@ const BOOKS = ["A", "B", "C", "D", "E"];
 function isInvalid(book) {
     return !BOOKS.includes(book);
 }
+const discountsByDistinct = {
+    1: 0,
+    2: 0.05,
+    3: 0.1
+}
 
 function getDiscount(books) {
-    if (books.length > 1 && books[0] !== books[1]) {
-        return 0.05
-    }
-    return 0
+    const distinctElements = countDistinct(books)
+    return discountsByDistinct[distinctElements]
+}
+
+function countDistinct(books) {
+    return new Set(books).size
 }
 
 module.exports = function resolve(input) {
