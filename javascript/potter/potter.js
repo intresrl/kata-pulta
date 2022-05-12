@@ -10,6 +10,12 @@ One copy of any of the five books costs 8 EUR.
  To pass the first test, just focus on pricing a single book
  ----------------
 
+If you try to buy a book not stated in the previous list you get 'ERROR'
+
+ ----------------
+ To pass the second test, check if the book is different from [A,B,C,D,E]. If it is, return 'ERROR'
+ ----------------
+
 If, however, you buy two different books, you get a 5% discount on those two books.
 
 If you buy 3 different books, you get a 10% discount.
