@@ -1,2 +1,4 @@
 /out/
 /python/magic-square/venv
+/javascript/node_modules/
+/javascript/package-lock.json
