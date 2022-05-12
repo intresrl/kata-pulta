@@ -1,12 +1,12 @@
-import {resolve} from "./potter";
+const resolve = require("./potter");
 
 
 const sapiens = (input, expectedOutput) => {
-    expect(resolve(input)).toEqual(expectedOutput)
+    expect(resolve(input)+'').toEqual(expectedOutput+ '')
 };
 
 describe('Harry Potter bookshop', () => {
 
-    it('one book', () => sapiens("A", 8))
+    it('Book A costs 8 euros', () => sapiens("A", 8))
 
 })

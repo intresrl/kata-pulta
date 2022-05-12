@@ -57,7 +57,7 @@ For a total of 51.20
 And 51.20 is the price with the biggest discount.
 */
 
-export function resolve(input) {
-    const output = ""
+module.exports = function resolve(input) {
+    const output = 8
     return output
 }
