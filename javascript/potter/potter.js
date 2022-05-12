@@ -16,6 +16,13 @@ If you try to buy a book not stated in the previous list you get 'ERROR'
  To pass the second test, check if the book is different from [A,B,C,D,E]. If it is, return 'ERROR'
  ----------------
 
+If you buy two copies of a book each copy costs 8 EUR.
+
+ ----------------
+ To pass the third test, consider that you may receive multiple books as input.
+ You should split the input string on whitespaces.
+ ----------------
+
 If, however, you buy two different books, you get a 5% discount on those two books.
 
 If you buy 3 different books, you get a 10% discount.

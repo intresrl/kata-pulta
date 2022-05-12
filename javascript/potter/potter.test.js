@@ -11,4 +11,6 @@ describe('Harry Potter bookshop', () => {
 
     it(`Book F returns 'ERROR'`, () => sapiens("F", 'ERROR'))
 
+    it(`Two copies of book B cost 16 EUR`, () => sapiens("B B", 16))
+
 })
