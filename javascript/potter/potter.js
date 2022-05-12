@@ -32,6 +32,10 @@
 
  If you buy 3 different books, you get a 10% discount.
 
+ ----------------
+ Start by counting how many different books there are
+ ----------------
+
  If you buy 4 different books, you get a 20% discount.
 
  If you go the whole hog, and buy all 5, you get a huge 25% discount.
@@ -81,12 +85,20 @@ function isInvalid(book) {
     return !BOOKS.includes(book);
 }
 
-module.exports = function resolve(input) {
-    let cartCost = 0;
-    for (let book of input.split(' ')) {
-        if (isInvalid(book))
-            return 'ERROR'
-        cartCost += 8;
+function getDiscount(books) {
+    if (books.length > 1 && books[0] !== books[1]) {
+        return 0.05
     }
-    return cartCost;
+    return 0
+}
+
+module.exports = function resolve(input) {
+    const books = input.split(' ')
+
+    if (books.some(isInvalid)) return 'ERROR'
+
+    const cartCost = 8 * books.length
+
+    const discount = getDiscount(books)
+    return cartCost * (1 - discount);
 }
