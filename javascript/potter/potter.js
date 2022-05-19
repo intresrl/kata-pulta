@@ -136,15 +136,12 @@ function priceDistinct(books) {
     return cartCost * (1 - discount);
 }
 
-const getAllPossibleSet = books => {
-    const booksOccurrences = {}
-    const distinctBooks = distinct(books);
-    const distinctBooksNumber = distinctBooks.length;
-    distinctBooks.forEach(x =>
-        booksOccurrences[x] = books.filter(b => b === x).length
-    )
+const getAllPartitions = books => {
+    const partitions = new Set()
+    const allGroups = [books]
 
-
+    partitions.add(allGroups)
+    return Array.from(partitions)
 };
 
 const calculatePriceForSet = set => set
@@ -156,6 +153,8 @@ module.exports = function resolve(input) {
 
     if (books.some(isInvalid)) return 'ERROR'
 
-    const allSets = getAllPossibleSet(books)
-    return Math.min(allSets.map(calculatePriceForSet))
+    const allSets = getAllPartitions(books)
+    return Math.min(...allSets.map(calculatePriceForSet))
 }
+
+module.exports.getAllPossibleSet = getAllPartitions

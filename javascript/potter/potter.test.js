@@ -1,4 +1,5 @@
 const resolve = require("./potter");
+const {getAllPossibleSet} = require("./potter");
 
 
 const sapiens = (input, expectedOutput) => {
@@ -25,6 +26,8 @@ describe('Harry Potter bookshop', () => {
 
     it(`Books AABBCCDE cost 51.20 EUR`, () => sapiens("A A B B C C D E", 51.20))
 
+    it(`Partition A`, () => expect(getAllPossibleSet(["A"])).toEqual([[['A']]]))
+    it(`Partition AB`, () => expect(getAllPossibleSet(['A', 'B'])).toEqual([[['A', 'B']], [['A'] ['B']]]))
 })
 
 
