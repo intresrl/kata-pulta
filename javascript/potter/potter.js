@@ -1,3 +1,5 @@
+
+const BOOKS = ["A", "B", "C", "D", "E"];
 /**
  To try and encourage more sales of the 5 different Harry Potter books they sell,
  a bookshop has decided to offer discounts of multiple-book purchases.
@@ -43,6 +45,11 @@
  Note that if you buy, say, four books, of which 3 are different titles,
  you get a 10% discount on the 3 that form part of a set, but the fourth book still costs 8 EUR.
 
+ ----------------
+ For the next test start by taking the largest group of distinct books and compute its price.
+ Then do the same for the remaining books and sum the prices.
+ ----------------
+
  Your mission is to write a piece of code to calculate the price of any conceivable shopping basket
  (containing only Harry Potter books), giving as big a discount as possible.
 
@@ -79,15 +86,15 @@
  And 51.20 is the price with the biggest discount.
  */
 
-const BOOKS = ["A", "B", "C", "D", "E"];
-
 function isInvalid(book) {
     return !BOOKS.includes(book);
 }
 const discountsByDistinct = {
     1: 0,
     2: 0.05,
-    3: 0.1
+    3: 0.1,
+    4: 0.2,
+    5: 0.25
 }
 
 function getDiscount(books) {
