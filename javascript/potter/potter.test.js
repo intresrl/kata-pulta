@@ -26,13 +26,23 @@ describe('Harry Potter bookshop', () => {
 
     it(`Books AABBCCDE cost 51.20 EUR`, () => sapiens("A A B B C C D E", 51.20))
 
-    it(`Partition A`, () => expect(getAllPartitions(["A"])).toEqual([[['A']]]))
+    it(`Books ABACADAEBECEDE cost 90.40 EUR`, () => sapiens("A B A C A D A E B E C E D E", 90.40))
+
+    it(`Partition A`, () => expect(getAllPartitions(["A"])).toEqual([[1]]))
 
     it(`Partition AB`, () => {
         const partitions = getAllPartitions(['A', 'B']);
-        expect(partitions).toContainEqual([['A', 'B']]);
-        expect(partitions).toContainEqual([['A'], ['B']]);
+        expect(partitions).not.toContainEqual([1, 1]);
+        expect(partitions).toContainEqual([2]);
     })
+
+    it(`Partition AA`, () => {
+        const partitions = getAllPartitions(['A', 'A']);
+        expect(partitions).toContainEqual([1, 1]);
+        expect(partitions).not.toContainEqual([2]);
+    })
+
+
 })
 
 

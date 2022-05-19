@@ -110,17 +110,12 @@ const discountsByDistinct = {
     5: 0.25
 }
 
-function getDiscount(books) {
-    const distinctElements = countDistinct(books)
-    return discountsByDistinct[distinctElements] ?? 0
-}
+const getDiscount = distinctBookCount => discountsByDistinct[distinctBookCount] ?? 0;
 
 const distinct = books => [...new Set(books)];
 
-const countDistinct = books => distinct(books).length;
-
 function priceDistinct(books) {
-    const cartCost = 8 * books.length
+    const cartCost = 8 * books
     const discount = getDiscount(books)
     return cartCost * (1 - discount);
 }
@@ -134,18 +129,19 @@ function recursivePartitions(_booksOccurrences) {
     const distinctCount = keys.length
     for (let mask = 1; mask < 2 ** distinctCount; mask++) {
         const rest = {...booksOccurrences}
-        const chosen = []
+        let chosen = 0
         for (let bitPos = 0; bitPos < distinctCount; bitPos++) {
             if ((mask >> bitPos) & 1) {
                 const book = keys[bitPos];
-                chosen.push(book)
+                chosen++
                 rest[book]--
             }
         }
-
+        if (chosen <= 1 && distinctCount > 1) continue;
         const restIsNotEmpty = Object.entries(rest).some(([, v]) => v > 0)
         if (restIsNotEmpty) {
             const restCombos = recursivePartitions(rest)
+                .filter(array => array.every(it => it <= chosen))
             restCombos.forEach(array => array.push(chosen))
             allThePartitions.push(...restCombos)
         } else {
@@ -153,16 +149,21 @@ function recursivePartitions(_booksOccurrences) {
         }
     }
 
-    return allThePartitions
+    const all = allThePartitions
+        .map(it => it.filter(e => e))
+        .map(it => JSON.stringify(it.sort()));
+    return [...new Set(all)].map(it => JSON.parse(it))
 }
 
 const getAllPartitions = books => {
+    if (books.length === 1) return [[1]]
     const booksOccurrences = {}
     const distinctBooks = distinct(books);
     distinctBooks.forEach(x =>
         booksOccurrences[x] = books.filter(b => b === x).length
     )
-    return recursivePartitions(booksOccurrences);
+    return recursivePartitions(booksOccurrences)
+
 };
 
 const calculatePriceForSet = set => set
