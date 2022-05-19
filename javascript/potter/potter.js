@@ -93,7 +93,7 @@ const BOOKS = ["A", "B", "C", "D", "E"];
  If you followed the tip from the previous test, you probably got 51.60 as a result :-(
  There are many ways to group the books to maximize the discount.
  If you can conceive an advanced algorithm, well, that's nice...
-  but brute-forcing it should be more than enough.
+ but brute-forcing it should be more than enough.
  ----------------
 
  */
@@ -125,54 +125,34 @@ function priceDistinct(books) {
     return cartCost * (1 - discount);
 }
 
-function recursivePartitions(booksOccurrences)/* string[][][] */ {
+function recursivePartitions(_booksOccurrences) {
     const allThePartitions = []
-    const yesOrNo = [true, false]
-    for (let a of yesOrNo) {
-        if (a && !booksOccurrences.A) continue;
-        for (let b of yesOrNo) {
-            if (b && !booksOccurrences.B) continue;
-            for (let c of yesOrNo) {
-                if (c && !booksOccurrences.C) continue;
-                for (let d of yesOrNo) {
-                    if (d && !booksOccurrences.D) continue;
-                    for (let e of yesOrNo) {
-                        if (e && !booksOccurrences.E) continue;
-                        if (!a && !b && !c && !d && !e) continue;
-                        const chosenBooks = []
-                        const remainingBooks = {...booksOccurrences}
-                        if (a) {
-                            chosenBooks.push("A");
-                            remainingBooks.A--
-                        }
-                        if (b) {
-                            chosenBooks.push("B");
-                            remainingBooks.B--
-                        }
-                        if (c) {
-                            chosenBooks.push("C");
-                            remainingBooks.C--
-                        }
-                        if (d) {
-                            chosenBooks.push("D");
-                            remainingBooks.D--
-                        }
-                        if (e) {
-                            chosenBooks.push("E");
-                            remainingBooks.E--
-                        }
-                        if (remainingBooks.A > 0 || remainingBooks.B > 0 || remainingBooks.C > 0 || remainingBooks.D > 0 || remainingBooks.E > 0) {
-                            const restCombos = recursivePartitions(remainingBooks)
-                            restCombos.forEach(array => array.push(chosenBooks))
-                            allThePartitions.push(...restCombos)
-                        } else {
-                            allThePartitions.push([chosenBooks])
-                        }
-                    }
-                }
+    const booksOccurrences = Object.fromEntries(
+        Object.entries(_booksOccurrences).filter(([, v]) => v > 0)
+    )
+    const keys = Object.keys(booksOccurrences);
+    const distinctCount = keys.length
+    for (let mask = 1; mask < 2 ** distinctCount; mask++) {
+        const rest = {...booksOccurrences}
+        const chosen = []
+        for (let bitPos = 0; bitPos < distinctCount; bitPos++) {
+            if ((mask >> bitPos) & 1) {
+                const book = keys[bitPos];
+                chosen.push(book)
+                rest[book]--
             }
         }
+
+        const restIsNotEmpty = Object.entries(rest).some(([, v]) => v > 0)
+        if (restIsNotEmpty) {
+            const restCombos = recursivePartitions(rest)
+            restCombos.forEach(array => array.push(chosen))
+            allThePartitions.push(...restCombos)
+        } else {
+            allThePartitions.push([chosen])
+        }
     }
+
     return allThePartitions
 }
 
