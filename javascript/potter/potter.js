@@ -1,12 +1,16 @@
-
 const BOOKS = ["A", "B", "C", "D", "E"];
+
 /**
  To try and encourage more sales of the 5 different Harry Potter books they sell,
  a bookshop has decided to offer discounts of multiple-book purchases.
 
  For sake of simplicity, the books will be represented by the simple strings "A", "B", "C", "D", "E".
 
- One copy of any of the five books costs 8 EUR.
+ Your code must calculate the price of a shopping basket in this bookshop.
+
+ *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+
+ One copy of any one of the five books costs 8 EUR.
 
  ----------------
  To pass the first test, just focus on pricing a single book
@@ -46,7 +50,7 @@ const BOOKS = ["A", "B", "C", "D", "E"];
  you get a 10% discount on the 3 that form part of a set, but the fourth book still costs 8 EUR.
 
  ----------------
- For the next test start by taking the largest group of distinct books and compute its price.
+ For the next test, start by taking the largest group of distinct books and compute its price.
  Then do the same for the remaining books and sum the prices.
  ----------------
 
@@ -84,11 +88,20 @@ const BOOKS = ["A", "B", "C", "D", "E"];
  For a total of 51.20
 
  And 51.20 is the price with the biggest discount.
+
+ ----------------
+ If you followed the tip from the previous test, you probably got 51.60 as a result :-(
+ There are many ways to group the books to maximize the discount.
+ If you can conceive an advanced algorithm, well, that's nice...
+  but brute-forcing it should be more than enough.
+ ----------------
+
  */
 
 function isInvalid(book) {
     return !BOOKS.includes(book);
 }
+
 const discountsByDistinct = {
     1: 0,
     2: 0.05,
@@ -99,11 +112,28 @@ const discountsByDistinct = {
 
 function getDiscount(books) {
     const distinctElements = countDistinct(books)
-    return discountsByDistinct[distinctElements]
+    return discountsByDistinct[distinctElements] ?? 0
 }
 
-function countDistinct(books) {
-    return new Set(books).size
+const distinct = books => [...new Set(books)];
+
+const countDistinct = books => distinct(books).length;
+
+const difference = (array1, array2) => {
+    let result = [...array1]
+    for (let e of array2) {
+        const index = result.indexOf(e)
+        if (index >= 0) {
+            result.splice(index, 1)
+        }
+    }
+    return result
+}
+
+function priceDistinct(books) {
+    const cartCost = 8 * books.length
+    const discount = getDiscount(books)
+    return cartCost * (1 - discount);
 }
 
 module.exports = function resolve(input) {
@@ -111,8 +141,8 @@ module.exports = function resolve(input) {
 
     if (books.some(isInvalid)) return 'ERROR'
 
-    const cartCost = 8 * books.length
+    const distinctBooks = distinct(books);
+    const rest = difference(books, distinctBooks);
 
-    const discount = getDiscount(books)
-    return cartCost * (1 - discount);
+    return priceDistinct(distinctBooks) + priceDistinct(rest);
 }
