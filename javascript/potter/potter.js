@@ -119,29 +119,70 @@ const distinct = books => [...new Set(books)];
 
 const countDistinct = books => distinct(books).length;
 
-const difference = (array1, array2) => {
-    let result = [...array1]
-    for (let e of array2) {
-        const index = result.indexOf(e)
-        if (index >= 0) {
-            result.splice(index, 1)
-        }
-    }
-    return result
-}
-
 function priceDistinct(books) {
     const cartCost = 8 * books.length
     const discount = getDiscount(books)
     return cartCost * (1 - discount);
 }
 
-const getAllPartitions = books => {
-    const partitions = new Set()
-    const allGroups = [books]
+function recursivePartitions(booksOccurrences)/* string[][][] */ {
+    const allThePartitions = []
+    const yesOrNo = [true, false]
+    for (let a of yesOrNo) {
+        if (a && !booksOccurrences.A) continue;
+        for (let b of yesOrNo) {
+            if (b && !booksOccurrences.B) continue;
+            for (let c of yesOrNo) {
+                if (c && !booksOccurrences.C) continue;
+                for (let d of yesOrNo) {
+                    if (d && !booksOccurrences.D) continue;
+                    for (let e of yesOrNo) {
+                        if (e && !booksOccurrences.E) continue;
+                        if (!a && !b && !c && !d && !e) continue;
+                        const chosenBooks = []
+                        const remainingBooks = {...booksOccurrences}
+                        if (a) {
+                            chosenBooks.push("A");
+                            remainingBooks.A--
+                        }
+                        if (b) {
+                            chosenBooks.push("B");
+                            remainingBooks.B--
+                        }
+                        if (c) {
+                            chosenBooks.push("C");
+                            remainingBooks.C--
+                        }
+                        if (d) {
+                            chosenBooks.push("D");
+                            remainingBooks.D--
+                        }
+                        if (e) {
+                            chosenBooks.push("E");
+                            remainingBooks.E--
+                        }
+                        if (remainingBooks.A > 0 || remainingBooks.B > 0 || remainingBooks.C > 0 || remainingBooks.D > 0 || remainingBooks.E > 0) {
+                            const restCombos = recursivePartitions(remainingBooks)
+                            restCombos.forEach(array => array.push(chosenBooks))
+                            allThePartitions.push(...restCombos)
+                        } else {
+                            allThePartitions.push([chosenBooks])
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return allThePartitions
+}
 
-    partitions.add(allGroups)
-    return Array.from(partitions)
+const getAllPartitions = books => {
+    const booksOccurrences = {}
+    const distinctBooks = distinct(books);
+    distinctBooks.forEach(x =>
+        booksOccurrences[x] = books.filter(b => b === x).length
+    )
+    return recursivePartitions(booksOccurrences);
 };
 
 const calculatePriceForSet = set => set
@@ -157,4 +198,4 @@ module.exports = function resolve(input) {
     return Math.min(...allSets.map(calculatePriceForSet))
 }
 
-module.exports.getAllPossibleSet = getAllPartitions
+module.exports.getAllPartitions = getAllPartitions
